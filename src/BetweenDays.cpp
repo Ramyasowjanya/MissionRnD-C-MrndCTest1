@@ -27,8 +27,29 @@ struct node{
 	int data;
 	struct node *next;
 };
-
+int check_same_or_consecutive(struct node *temp1,struct node *temp2)
+{
+	while (temp1!=NULL)
+	{
+		if (temp1->data != temp2->data)
+			return 0;
+		temp1 = temp1->next;
+		temp2 = temp2->next;
+	}
+	return 1;
+}
 
 int between_days(struct node *date1head, struct node *date2head){
+	int i=0;
+	struct node *temp1, *temp2;
+	if (date1head != NULL&&date2head != NULL)
+	{
+		temp1 = date1head;
+		temp2 = date2head;
+		i=check_same_or_consecutive(temp1,temp2);
+		if (i == 1)
+			return 0;
+
+	}
 	return -1;
 }

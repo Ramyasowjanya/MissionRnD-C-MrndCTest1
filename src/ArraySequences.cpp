@@ -31,7 +31,49 @@ Difficulty : Medium
 #include <stdio.h>
 #include <math.h>
 
-int * find_sequences(int *arr, int len){
-	//Return final array which has 6indexes [AP1_S,AP1_E,AP2_S,AP2_E,GP1_S,GP2_E]
+
+int * find_sequences(int *arr, int len) {
+	int arth[4];
+	//int return_arr[6];
+	int geo[2], index = 0, aindex = 0, gindex = 0, temp;
+	if (arr != NULL)
+	{
+		while (index != len)
+		{
+			if (aindex<4 && arr[index + 1] - arr[index] == arr[index + 2] - arr[index + 1])
+			{
+				arth[aindex++] = index;
+				temp = index;
+				while (arr[temp + 1] - arr[temp] == arr[temp + 2] - arr[temp + 1])
+				{
+					temp++;
+				}
+				arth[aindex++] = temp + 1;
+				index = temp;
+			}
+			else if (gindex<2 && (arr[index + 1] / arr[index]) != 1 && arr[index + 1] / arr[index] == arr[index + 2] / arr[index + 1])
+			{
+				geo[gindex++] = index;
+				temp = index;
+				while (arr[temp + 1] / arr[temp] == arr[temp + 2] / arr[temp + 1])
+				{
+					temp++;
+				}
+				geo[gindex++] = temp + 1;
+				index = temp;
+			}
+			else
+				index++;
+		}index = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			arr[index++] = arth[i];
+		}
+		for (int i = 0; i < 2; i++)
+		{
+			arr[index++] = geo[i];
+		}
+		return arr;
+	}
 	return NULL;
 }
