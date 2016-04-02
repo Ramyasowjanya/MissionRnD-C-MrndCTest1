@@ -72,19 +72,20 @@ int merge_circularlists(struct node **head1, struct node **head2) {
 			temp1 = &((*temp1)->next);
 		}
 		temp2 = head2;
+		temp3 = head2;
 		while ((*temp2)->next != NULL)
 		{
 			if ((*temp2)->data > (*temp2)->next->data)
 				//swap(&(*temp2)->data , &(*temp2)->next->data);
 			{
-				tempvar = (*temp2)->data;
+				tempvar = (*temp2)->next->data;
 				(*temp2)->next->data = (*temp2)->data;
 				(*temp2)->data = tempvar;
 			}
-			(*temp2) = (*temp2)->next;
+			temp2 = &((*temp2)->next);
 		}
 		(*temp2)->next = *head1;
-
+		(*temp1)->next = *temp3;
 		return count;
 	}
 	return -1;
